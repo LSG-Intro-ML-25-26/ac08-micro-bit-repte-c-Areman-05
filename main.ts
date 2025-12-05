@@ -1,3 +1,23 @@
-basic.forever(function () {
-	
+radio.onReceivedNumber(function (receivedNumber) {
+    let recibirNúmero = 0
+    if (recibirNúmero >= dado) {
+        basic.showIcon(IconNames.Sad)
+    } else {
+        basic.showIcon(IconNames.Happy)
+    }
 })
+input.onButtonPressed(Button.A, function () {
+    radio.sendString("Hola micro:bit")
+    basic.showIcon(IconNames.Yes)
+})
+input.onGesture(Gesture.Shake, function () {
+    dado = randint(1, 6)
+    basic.showNumber(dado)
+    radio.sendNumber(dado)
+})
+radio.onReceivedString(function (receivedString) {
+    basic.showIcon(IconNames.Target)
+    basic.showString(receivedString)
+})
+let dado = 0
+radio.setGroup(1)
